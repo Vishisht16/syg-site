@@ -92,8 +92,11 @@ function sygDir(): string {
   return clone;
 }
 
+// Every file in a directory but the hidden ones: a dotfile in docs/, such as
+// the marker `syg docs build` leaves in its output, is not published.
 function walk(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true })
+    .filter((e) => !e.name.startsWith("."))
     .flatMap((e) =>
       e.isDirectory() ? walk(join(dir, e.name)) : e.isFile() ? [join(dir, e.name)] : [],
     )
@@ -117,7 +120,10 @@ if (!existsSync(join(docsDir, "index.md"))) {
 }
 let commit = "";
 try {
-  commit = execFileSync("git", ["-C", syg, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+  commit = execFileSync("git", ["-C", syg, "rev-parse", "HEAD"], {
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "ignore"],
+  }).trim();
 } catch {
   // not a git checkout
 }

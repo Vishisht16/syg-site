@@ -15,15 +15,15 @@ files for GitHub Pages.
 Every page keeps the address the binary, the installers and existing links
 use. A page is at its Markdown path with `.html` for `.md`:
 
-| Content | Address |
-|---|---|
-| `docs/install.md` | `/install.html`, also served at `/install` |
-| `docs/rules/availability.md` | `/rules/availability.html`, each rule a section: `#single-replica-budget` |
-| `docs/rules/index.md` | `/rules/index.html`, also `/rules/` |
-| `docs/topics/qos.md` | `/topics/qos.html` |
-| `docs/notes/05-containers.md` | `/notes/05-containers.html` |
-| `docs/index.md`, the overview | `/overview.html` |
-| `docs/schemas/**`, `install.sh`, `install.ps1` | the same paths, as they are |
+| Content                                        | Address                                                                   |
+| ---------------------------------------------- | ------------------------------------------------------------------------- |
+| `docs/install.md`                              | `/install.html`, also served at `/install`                                |
+| `docs/rules/availability.md`                   | `/rules/availability.html`, each rule a section: `#single-replica-budget` |
+| `docs/rules/index.md`                          | `/rules/index.html`, also `/rules/`                                       |
+| `docs/topics/qos.md`                           | `/topics/qos.html`                                                        |
+| `docs/notes/05-containers.md`                  | `/notes/05-containers.html`                                               |
+| `docs/index.md`, the overview                  | `/overview.html`                                                          |
+| `docs/schemas/**`, `install.sh`, `install.ps1` | the same paths, as they are                                               |
 
 `/` is the landing page, `/books.html` the library of the Engineering Notes,
 and `/.well-known/security.txt` is written at each build, with `/build.json`,
