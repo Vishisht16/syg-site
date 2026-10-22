@@ -1,0 +1,108 @@
+name: deploy
+
+# Builds the site from Syg's documentation and publishes it to
+# syg.vishisht.tech, then checks that the domain serves what was built. It
+# runs on a push here; when Syg publishes its docs (Syg's publish-docs.yml
+# dispatches it with the commit it made); daily, because security.txt expires
+# within a year and a missed dispatch is caught up; and by hand, with any
+# branch, tag or commit of Syg. A pull request is built and checked, never
+# published.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "the branch, tag or commit of Vishisht16/Syg whose docs to publish"
+        required: true
+        default: main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'pages' }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    outputs:
+      syg: ${{ steps.syg.outputs.commit }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Vishisht16/Syg
+          ref: ${{ inputs.ref || 'main' }}
+          path: .syg
+          persist-credentials: false
+      - id: syg
+        run: echo "commit=$(git -C .syg rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: package.json
+          no-cache: true
+      - run: bun install --frozen-lockfile
+      - name: content, from Syg's docs
+        run: bun run content
+        env:
+          SYG_DIR: .syg
+      - run: bun run typecheck
+      - run: bun run lint
+      - run: bun run test
+      - name: build
+        run: bun run build
+        env:
+          SYG_DIR: .syg
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist/client
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  # The domain now serves the site built, and every address Syg prints finds
+  # its page (scripts/check-site.sh).
+  verify:
+    needs: [build, deploy]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Vishisht16/Syg
+          ref: ${{ needs.build.outputs.syg }}
+          path: .syg
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/pages
+      - name: the site built
+        run: mkdir -p "$RUNNER_TEMP/site" && tar -xf "$RUNNER_TEMP/pages/artifact.tar" -C "$RUNNER_TEMP/site"
+      - name: the domain serves it
+        run: bash scripts/check-site.sh https://syg.vishisht.tech "$RUNNER_TEMP/site" .syg

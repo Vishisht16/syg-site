@@ -1,0 +1,15 @@
+node_modules
+dist
+*.log
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Built from Syg's docs by scripts/content.ts, never committed.
+/.syg
+/src/generated
+/public/install.sh
+/public/install.ps1
+/public/schemas
+/public/.well-known

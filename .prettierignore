@@ -1,0 +1,6 @@
+node_modules
+dist
+.syg
+src/generated
+bun.lock
+src/routeTree.gen.ts

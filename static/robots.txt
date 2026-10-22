@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://syg.vishisht.tech/sitemap.xml
