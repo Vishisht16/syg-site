@@ -1,9 +1,14 @@
 version: 2
 updates:
+  # Monthly, one pull request per ecosystem. A new major version of a package
+  # changes how it is used, so it is taken by hand, not proposed here.
   - package-ecosystem: bun
     directory: /
     schedule:
       interval: monthly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       dependencies:
         patterns: ["*"]

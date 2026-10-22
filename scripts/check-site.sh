@@ -62,7 +62,7 @@ check() {
     code=$(get "$page$q" "$work/got")
     if [ "$code" != 200 ]; then
       echo "$code: $page"
-    elif ! grep -qF "id=\"$id\"" "$work/got"; then
+    elif ! grep -aqF "id=\"$id\"" "$work/got"; then
       echo "no section: $url"
     fi
   done < "$work/rules.txt"

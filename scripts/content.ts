@@ -305,6 +305,9 @@ if (missing.length) {
   console.error(`Syg's checkout at ${syg} lacks ${missing.join(", ")}, which the site must serve`);
   process.exit(1);
 }
+// The commit of Syg the site was built from, which Syg's publish-docs.yml
+// waits to see served after it publishes its docs.
+writeFileSync(join(pub, "build.json"), JSON.stringify({ syg: commit }) + "\n");
 // RFC 9116: where to report a vulnerability. It expires within a year, so
 // each build writes it afresh, and the site is rebuilt daily.
 const expires = new Date(Date.now() + 364 * 24 * 3600 * 1000).toISOString().slice(0, 10);

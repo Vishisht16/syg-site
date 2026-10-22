@@ -41,6 +41,7 @@ for (const f of [
   "robots.txt",
   "sitemap.xml",
   "favicon.svg",
+  "build.json",
 ]) {
   if (!existsSync(join(dist, f))) problems.push(`no ${f}`);
 }

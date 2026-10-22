@@ -26,8 +26,9 @@ use. A page is at its Markdown path with `.html` for `.md`:
 | `docs/schemas/**`, `install.sh`, `install.ps1` | the same paths, as they are |
 
 `/` is the landing page, `/books.html` the library of the Engineering Notes,
-and `/.well-known/security.txt` is written at each build. Headings keep the
-ids they had, so a link to a section still lands on it.
+and `/.well-known/security.txt` is written at each build, with `/build.json`,
+which names the commit of Syg the site was built from. Headings keep the ids
+they had, so a link to a section still lands on it.
 
 ## Working on it
 
