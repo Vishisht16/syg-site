@@ -57,6 +57,7 @@ const AUTHORED: [string, Section][] = [
   ["compatibility", "Project"],
   ["performance", "Project"],
   ["security", "Project"],
+  ["testing", "Project"],
   ["network", "Project"],
   ["privacy", "Project"],
   ["support", "Project"],
@@ -322,7 +323,9 @@ writeFileSync(
   join(pub, ".well-known", "security.txt"),
   [
     "Contact: https://github.com/vishisht16/syg/security/advisories/new",
+    "Contact: mailto:syg@vishisht.tech",
     `Expires: ${expires}T00:00:00Z`,
+    `Acknowledgments: ${SITE}/security.html#hall-of-fame`,
     "Policy: https://github.com/vishisht16/syg/security/policy",
     "Preferred-Languages: en",
     `Canonical: ${SITE}/.well-known/security.txt`,
