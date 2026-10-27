@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, FileCode2, ShieldCheck, Workflow } from "lucide-react";
+import { Lockup } from "@/components/site/Brand";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { books, docs, findDoc } from "@/lib/content";
 import { SITE } from "@/lib/site";
@@ -45,6 +46,8 @@ function Home() {
       <main>
         <section className="relative overflow-hidden border-b">
           <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] [background-size:48px_48px] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
+          <div className="pointer-events-none absolute -right-32 -top-24 size-[32rem] rounded-full bg-primary/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-40 right-1/4 size-80 rounded-full bg-coral/10 blur-3xl dark:bg-coral/5" />
           <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:py-28">
             <div className="animate-rise">
               <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
@@ -78,8 +81,8 @@ function Home() {
             <div className="animate-rise self-center" style={{ animationDelay: "100ms" }}>
               <div className="overflow-hidden rounded-xl border bg-card shadow-[0_20px_50px_-20px_color-mix(in_oklab,var(--primary)_35%,transparent)]">
                 <div className="flex items-center gap-1.5 border-b px-4 py-2.5">
-                  <span className="size-2.5 rounded-full bg-border" />
-                  <span className="size-2.5 rounded-full bg-border" />
+                  <span className="size-2.5 rounded-full bg-coral" />
+                  <span className="size-2.5 rounded-full bg-primary" />
                   <span className="size-2.5 rounded-full bg-border" />
                   <span className="ml-3 font-mono text-xs text-muted-foreground">shop.syg</span>
                 </div>
@@ -87,7 +90,7 @@ function Home() {
                   {sample}
                 </pre>
                 <div className="border-t bg-muted/50 px-5 py-3 font-mono text-xs text-muted-foreground">
-                  <span className="text-primary">$</span> syg build
+                  <span className="text-coral">$</span> syg build
                 </div>
               </div>
             </div>
@@ -170,7 +173,7 @@ function Home() {
       </main>
       <footer className="border-t">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-sm text-muted-foreground sm:px-8">
-          <span>Syg</span>
+          <Lockup className="h-6 w-auto" title="Syg" />
           <div className="flex gap-5">
             <Link to={url("privacy")} className="hover:text-foreground">
               Privacy

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { Mark } from "./Brand";
 
 // A page of the documentation, which the router reaches through /$.
 const overview: string = "/overview.html";
@@ -14,6 +15,9 @@ export function NotFound() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
+        <Link to="/" aria-label="Syg home" className="mx-auto mb-6 block w-fit">
+          <Mark className="size-12" />
+        </Link>
         <p className="font-mono text-sm text-primary">404</p>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
           Page not found

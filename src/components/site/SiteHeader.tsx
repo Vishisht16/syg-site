@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, Moon, Search, Sun } from "lucide-react";
+import { Lockup } from "./Brand";
 
 const home = "/";
 // A page of the documentation, which the router reaches through /$.
@@ -8,11 +9,8 @@ const library = "/books.html";
 
 export function Logo() {
   return (
-    <Link to={home} className="flex items-center gap-2 font-semibold tracking-tight">
-      <span className="grid size-6 place-items-center rounded-md bg-primary font-mono text-xs text-primary-foreground">
-        S
-      </span>
-      <span>Syg</span>
+    <Link to={home} className="flex items-center" aria-label="Syg home">
+      <Lockup className="h-8 w-auto" />
     </Link>
   );
 }

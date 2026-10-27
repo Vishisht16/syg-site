@@ -44,6 +44,7 @@
   --color-code-foreground: var(--code-foreground);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
+  --color-coral: var(--coral);
 }
 
 :root {
@@ -54,25 +55,27 @@
   --card-foreground: oklch(0.21 0.025 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.025 260);
-  --primary: oklch(0.53 0.21 262);
+  /* Syg's blurple, #4F46E5, and coral, #FF453A. */
+  --primary: oklch(0.511 0.23 277);
   --primary-foreground: oklch(0.99 0 0);
+  --coral: oklch(0.663 0.224 28.3);
   --secondary: oklch(0.965 0.006 255);
   --secondary-foreground: oklch(0.25 0.03 260);
   --muted: oklch(0.965 0.006 255);
   --muted-foreground: oklch(0.52 0.025 258);
-  --accent: oklch(0.955 0.03 262);
-  --accent-foreground: oklch(0.42 0.19 262);
+  --accent: oklch(0.955 0.03 277);
+  --accent-foreground: oklch(0.42 0.2 277);
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.915 0.01 255);
   --input: oklch(0.915 0.01 255);
-  --ring: oklch(0.53 0.21 262);
+  --ring: oklch(0.511 0.23 277);
   --code: oklch(0.975 0.005 255);
   --code-foreground: oklch(0.28 0.03 260);
   --tk-c: oklch(0.6 0.02 255);
   --tk-s: oklch(0.5 0.13 150);
   --tk-n: oklch(0.55 0.16 40);
-  --tk-k: oklch(0.5 0.2 262);
+  --tk-k: oklch(0.5 0.21 277);
   --cream: oklch(0.975 0.015 85);
   --ink: oklch(0.22 0.02 60);
 }
@@ -84,25 +87,25 @@
   --card-foreground: oklch(0.94 0.008 255);
   --popover: oklch(0.21 0.018 260);
   --popover-foreground: oklch(0.94 0.008 255);
-  --primary: oklch(0.7 0.16 258);
+  --primary: oklch(0.7 0.16 278);
   --primary-foreground: oklch(0.17 0.02 260);
   --secondary: oklch(0.24 0.018 260);
   --secondary-foreground: oklch(0.94 0.008 255);
   --muted: oklch(0.235 0.017 260);
   --muted-foreground: oklch(0.68 0.02 258);
-  --accent: oklch(0.27 0.05 262);
-  --accent-foreground: oklch(0.82 0.11 258);
+  --accent: oklch(0.27 0.06 277);
+  --accent-foreground: oklch(0.82 0.11 278);
   --destructive: oklch(0.68 0.19 22);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.29 0.017 260);
   --input: oklch(0.29 0.017 260);
-  --ring: oklch(0.7 0.16 258);
+  --ring: oklch(0.7 0.16 278);
   --code: oklch(0.2 0.017 260);
   --code-foreground: oklch(0.9 0.01 255);
   --tk-c: oklch(0.58 0.02 255);
   --tk-s: oklch(0.78 0.12 150);
   --tk-n: oklch(0.78 0.12 60);
-  --tk-k: oklch(0.76 0.13 258);
+  --tk-k: oklch(0.76 0.13 278);
 }
 
 @layer base {
@@ -440,6 +443,23 @@
 }
 
 /* ---------- Reader (books) ---------- */
+/* The books are a world of their own, where Syg is optional: the brand's
+   colours stop at their door, and what they inherit from the site's theme is
+   kept as it was. */
+.reader {
+  --primary: oklch(0.53 0.21 262);
+  --ring: oklch(0.53 0.21 262);
+  --accent: oklch(0.955 0.03 262);
+  --accent-foreground: oklch(0.42 0.19 262);
+  --tk-k: oklch(0.5 0.2 262);
+}
+.dark .reader {
+  --primary: oklch(0.7 0.16 258);
+  --ring: oklch(0.7 0.16 258);
+  --accent: oklch(0.27 0.05 262);
+  --accent-foreground: oklch(0.82 0.11 258);
+  --tk-k: oklch(0.76 0.13 258);
+}
 .reader {
   --r-bg: oklch(0.975 0.015 85);
   --r-fg: oklch(0.24 0.02 60);
