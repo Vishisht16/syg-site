@@ -534,6 +534,10 @@
   margin-inline: auto;
   hyphens: auto;
   font-variant-numeric: oldstyle-nums;
+  /* A long URL or identifier breaks where it must, so the page never grows
+     wider than a phone's screen (which then zooms out to fit it). */
+  overflow-wrap: break-word;
+  min-width: 0;
 
   & .page-title {
     font-family: var(--font-display);
@@ -581,6 +585,12 @@
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
     text-decoration-color: color-mix(in oklab, var(--r-accent) 40%, transparent);
+    overflow-wrap: anywhere;
+  }
+  & img,
+  & svg {
+    max-width: 100%;
+    height: auto;
   }
   & strong {
     font-weight: 600;
@@ -625,6 +635,7 @@
   & :not(pre) > code {
     font-family: var(--font-mono);
     font-size: 0.8em;
+    overflow-wrap: anywhere;
     background: var(--r-soft);
     padding: 0.1em 0.35em;
     border-radius: 4px;
@@ -674,6 +685,8 @@
   color: var(--r-accent);
 }
 .reader .mermaid-block {
+  max-width: 100%;
+  overflow-x: auto;
   --code: var(--r-soft);
   --code-foreground: var(--r-fg);
   --border: var(--r-rule);
