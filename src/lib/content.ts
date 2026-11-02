@@ -1,9 +1,20 @@
 import data from "@/generated/manifest.json";
-import type { Book, Chapter, DocEntry, Manifest, RenderedPage } from "./site";
+import {
+  sections,
+  type Book,
+  type Chapter,
+  type DocEntry,
+  type Manifest,
+  type RenderedPage,
+} from "./site";
 
 // The navigation, which scripts/content.ts writes from Syg's docs/.
 export const manifest = data as Manifest;
-export const docs: DocEntry[] = manifest.docs;
+const all: DocEntry[] = manifest.docs;
+
+// The pages in the order the navigation shows them, section by section: the
+// order a reader follows, page to page, with Previous and Next.
+export const docs: DocEntry[] = sections.flatMap((sec) => all.filter((d) => d.section === sec));
 export const books: Book[] = manifest.books;
 
 export const findDoc = (key: string) => docs.find((d) => d.key === key);
